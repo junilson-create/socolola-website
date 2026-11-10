@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<style>
+html { color-scheme: light; }
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<title>Socolola Holding</title>
+<meta name="description" content="Socolola Holding – Gestão de Empreendimentos, Lda. Holding angolana sediada em Luanda: infraestruturas, construção civil, imobiliário e estruturação financeira.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: logo-led header, diagonal split hero echoing the brand banner, then quiet ruled sections on a single column grid */
+:root {
+  --bg: #f6f8f7;
+  --surface: #ffffff;
+  --ink: #062224;          /* logo wordmark */
+  --muted: #4a5f61;
+  --teal: #075e68;         /* logo "HOLDING, LDA" */
+  --teal-soft: #dbe9e8;
+  --line: #d3dfde;
+  --hero-bg: #062224;
+  --hero-fg: #eef4f3;
+  --hero-accent: #7fc3c6;
+  --logo-dark: block;
+  --logo-light: none;
+  --f-display: "Sora", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --wrap: 1120px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #071a1c; --surface: #0c2427; --ink: #e8f0ef; --muted: #9db3b4;
+    --teal: #7fc3c6; --teal-soft: #12353a; --line: #1d3d41;
+    --hero-bg: #0d3036; --hero-fg: #eef4f3; --hero-accent: #8fd0d2;
+    --logo-dark: none; --logo-light: block; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #071a1c; --surface: #0c2427; --ink: #e8f0ef; --muted: #9db3b4;
+  --teal: #7fc3c6; --teal-soft: #12353a; --line: #1d3d41;
+  --hero-bg: #0d3036; --hero-fg: #eef4f3; --hero-accent: #8fd0d2;
+  --logo-dark: none; --logo-light: block; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 1.0625rem; line-height: 1.65;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+
+/* Bilingual content: one language visible at a time */
+:root:not([data-lang="en"]) [lang="en"] { display: none; }
+:root[data-lang="en"] [lang="pt"] { display: none; }
+
+.wrap {
+  max-width: var(--wrap); margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 2px; }
+.label {
+  font-family: var(--f-mono); font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal);
+}
+
+/* Header */
+header.site {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+}
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.brand { display: block; width: 150px; flex-shrink: 0; }
+.brand img { width: 100%; height: auto; }
+.brand .l-dark { display: var(--logo-dark); }
+.brand .l-light { display: var(--logo-light); }
+nav.main { display: flex; align-items: center; gap: 28px; font-family: var(--f-display); font-size: 0.875rem; }
+nav.main a { text-decoration: none; color: var(--muted); }
+nav.main a:hover { color: var(--ink); }
+.lang { display: flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; }
+.lang button {
+  font: 600 0.75rem var(--f-display); letter-spacing: 0.06em; border: 0; background: none;
+  color: var(--muted); padding: 5px 11px; border-radius: 999px; cursor: pointer;
+}
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+@media (max-width: 760px) { nav.main a { display: none; } .brand { width: 120px; } }
+
+/* Hero: diagonal split, like the brand banner */
+.hero { background: var(--hero-bg); color: var(--hero-fg); position: relative; overflow: hidden; }
+/* Photo carousel: crossfading slides inside the diagonal panel */
+.hero-photos {
+  position: absolute; inset: 0 0 0 auto; width: 48%;
+  clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%);
+  background: var(--hero-bg);
+}
+.hero-photos .slide {
+  position: absolute; inset: 0; background-size: cover; background-repeat: no-repeat;
+  opacity: 0; animation: heroFade 24s infinite;
+}
+.hero-photos .slide:nth-child(1) { background-image: url("assets/setor-edificios.jpg"); background-position: center 35%; animation-delay: 0s; opacity: 1; }
+.hero-photos .slide:nth-child(2) { background-image: url("assets/setor-estradas.jpg"); background-position: 40% bottom; animation-delay: 6s; }
+.hero-photos .slide:nth-child(3) { background-image: url("assets/setor-mineracao.jpg"); background-position: center; animation-delay: 12s; }
+.hero-photos .slide:nth-child(4) { background-image: url("assets/setor-petroleo.jpg"); background-position: center 40%; animation-delay: 18s; }
+.hero-photos::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--hero-bg) 55%, transparent), transparent 45%);
+}
+@keyframes heroFade {
+  0% { opacity: 0; }
+  4% { opacity: 1; }
+  25% { opacity: 1; }
+  30% { opacity: 0; }
+  100% { opacity: 0; }
+}
+/* First slide is visible at rest; its animation starts from opacity 1 so the first frame is never empty */
+.hero-photos .slide:nth-child(1) { animation-name: heroFadeFirst; }
+@keyframes heroFadeFirst {
+  0% { opacity: 1; }
+  25% { opacity: 1; }
+  30% { opacity: 0; }
+  96% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.hero-dots { display: flex; gap: 6px; margin-top: 4px; }
+.hero-dots span { width: 22px; height: 2px; background: color-mix(in srgb, var(--hero-fg) 30%, transparent); position: relative; overflow: hidden; }
+.hero-dots span::after {
+  content: ""; position: absolute; inset: 0; background: var(--hero-accent);
+  transform: scaleX(0); transform-origin: left; animation: heroDot 24s infinite linear;
+}
+.hero-dots span:nth-child(2)::after { animation-delay: 6s; }
+.hero-dots span:nth-child(3)::after { animation-delay: 12s; }
+.hero-dots span:nth-child(4)::after { animation-delay: 18s; }
+@keyframes heroDot { 0% { transform: scaleX(0); } 25% { transform: scaleX(1); } 25.01%, 100% { transform: scaleX(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-photos .slide, .hero-dots span::after { animation: none; }
+  .hero-dots { display: none; }
+}
+@media (max-width: 820px) {
+  .hero-photos { width: 100%; clip-path: none; }
+  .hero-photos::after {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--hero-bg) 80%, transparent), color-mix(in srgb, var(--hero-bg) 93%, transparent));
+  }
+}
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(64px, 11vw, 128px); display: grid; gap: 28px; }
+.hero .label { color: var(--hero-accent); }
+.hero h1 { font-size: clamp(2.1rem, 5.2vw, 3.9rem); line-height: 1.08; font-weight: 700; max-width: 17ch; }
+.hero p.lead { font-size: clamp(1.08rem, 1.8vw, 1.28rem); max-width: 54ch; color: color-mix(in srgb, var(--hero-fg) 82%, transparent); }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.btn {
+  font: 600 0.9375rem var(--f-display); text-decoration: none; padding: 13px 22px;
+  border-radius: 4px; display: inline-block;
+}
+.btn.primary { background: var(--hero-accent); color: #062224; }
+.btn.ghost { border: 1px solid color-mix(in srgb, var(--hero-fg) 40%, transparent); color: var(--hero-fg); }
+.btn:hover { filter: brightness(1.06); }
+.coords { font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.08em; color: color-mix(in srgb, var(--hero-fg) 60%, transparent); margin-top: 20px; }
+
+/* Sections */
+section.block { padding-block: clamp(64px, 9vw, 104px); border-bottom: 1px solid var(--line); }
+.head { display: grid; gap: 14px; margin-bottom: 48px; max-width: 62ch; }
+.head h2 { font-size: clamp(1.6rem, 3.2vw, 2.35rem); line-height: 1.15; font-weight: 600; }
+.head p { color: var(--muted); }
+
+/* Sectors: four equal columns, ruled */
+.sectors { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--ink); }
+.sector { padding: 24px 22px 8px 0; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.sector + .sector { padding-left: 22px; border-left: 1px solid var(--line); }
+.sector svg { width: 34px; height: 34px; stroke: var(--teal); fill: none; stroke-width: 1.6; }
+.sector h3 { font-size: 1.125rem; font-weight: 600; }
+.sector p { color: var(--muted); font-size: 0.98rem; }
+@media (max-width: 900px) {
+  .sectors { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sector:nth-child(3) { padding-left: 0; border-left: 0; }
+  .sector:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+@media (max-width: 520px) {
+  .sectors { grid-template-columns: minmax(0, 1fr); }
+  .sector, .sector + .sector { padding-left: 0; border-left: 0; }
+  .sector + .sector { border-top: 1px solid var(--line); }
+}
+
+/* Approach: three entry routes, side by side */
+.approach { background: var(--surface); }
+.routes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.route { border: 1px solid var(--line); border-radius: 6px; padding: 26px; display: grid; gap: 12px; align-content: start; background: var(--bg); min-width: 0; }
+.route .tag { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); background: var(--teal-soft); padding: 4px 8px; border-radius: 3px; justify-self: start; }
+.route h3 { font-size: 1.2rem; font-weight: 600; }
+.route p { color: var(--muted); font-size: 0.98rem; }
+@media (max-width: 820px) { .routes { grid-template-columns: minmax(0, 1fr); } }
+
+/* Criteria: three questions every opportunity must answer */
+.criteria { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 48px; align-items: start; }
+.criteria .head { margin-bottom: 0; }
+.questions { list-style: none; margin: 0; padding: 0; display: grid; }
+.questions li { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 20px; padding-block: 22px; border-top: 1px solid var(--line); }
+.questions li:last-child { border-bottom: 1px solid var(--line); }
+.questions .k { font-family: var(--f-display); font-weight: 600; font-size: 1rem; }
+.questions .v { color: var(--muted); }
+@media (max-width: 820px) {
+  .criteria { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .questions li { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+}
+
+/* Team: four equal portraits, caption below the photo */
+.team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; max-width: 900px; margin-inline: auto; }
+#equipa .head { margin-inline: auto; text-align: center; justify-items: center; }
+.person { display: grid; gap: 14px; align-content: start; margin: 0; min-width: 0; }
+.person img {
+  width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block;
+  border-radius: 4px; background: var(--teal-soft); filter: saturate(0.92);
+}
+.person figcaption { display: grid; gap: 4px; border-top: 2px solid var(--ink); padding-top: 12px; }
+.person .name { font-family: var(--f-display); font-weight: 600; font-size: 1.05rem; line-height: 1.3; }
+.person .role { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); line-height: 1.5; }
+@media (max-width: 600px) { .team-grid { grid-template-columns: minmax(0, 1fr); max-width: 340px; } }
+
+/* Contact */
+.contact { background: var(--hero-bg); color: var(--hero-fg); border-bottom: 0; }
+.contact .label { color: var(--hero-accent); }
+.contact .head p { color: color-mix(in srgb, var(--hero-fg) 78%, transparent); }
+.contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid color-mix(in srgb, var(--hero-fg) 25%, transparent); }
+.contact-item { padding: 22px 22px 0 0; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.contact-item + .contact-item { padding-left: 22px; border-left: 1px solid color-mix(in srgb, var(--hero-fg) 18%, transparent); }
+.contact-item .label { font-size: 0.7rem; }
+.contact-item .val { font-family: var(--f-display); font-size: 1.05rem; overflow-wrap: anywhere; user-select: all; }
+.contact-item a.val { text-decoration: none; }
+@media (max-width: 760px) {
+  .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .contact-item, .contact-item + .contact-item { padding: 18px 0; border-left: 0; }
+  .contact-item + .contact-item { border-top: 1px solid color-mix(in srgb, var(--hero-fg) 18%, transparent); }
+}
+
+footer.site { background: var(--hero-bg); color: color-mix(in srgb, var(--hero-fg) 60%, transparent); font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.04em; }
+footer.site .wrap { padding-block: 28px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; border-top: 1px solid color-mix(in srgb, var(--hero-fg) 15%, transparent); }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Socolola Holding">
+      <img class="l-dark" src="assets/logo.png" alt="Socolola Holding, Lda" width="797" height="208">
+      <img class="l-light" src="assets/logo-light.png" alt="Socolola Holding, Lda" width="797" height="208">
+    </a>
+    <nav class="main" aria-label="Principal">
+      <a href="#areas"><span lang="pt">Áreas</span><span lang="en">Sectors</span></a>
+      <a href="#abordagem"><span lang="pt">Abordagem</span><span lang="en">Approach</span></a>
+      <a href="#equipa"><span lang="pt">Equipa</span><span lang="en">Team</span></a>
+      <a href="#contacto"><span lang="pt">Contacto</span><span lang="en">Contact</span></a>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" id="btn-pt" data-set="pt" aria-pressed="true">PT</button>
+        <button type="button" id="btn-en" data-set="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-photos" role="img" aria-label="Fotografias de obras de construção, infraestruturas, mineração e petróleo">
+      <div class="slide"></div><div class="slide"></div><div class="slide"></div><div class="slide"></div>
+    </div>
+    <div class="wrap">
+      <span class="label"><span lang="pt">Holding angolana · Luanda</span><span lang="en">Angolan holding company · Luanda</span></span>
+      <h1>
+        <span lang="pt">Desenvolvemos empreendimentos e parcerias de investimento em Angola.</span>
+        <span lang="en">We develop new businesses and investment partnerships in Angola.</span>
+      </h1>
+      <p class="lead">
+        <span lang="pt">A Socolola Holding é uma sociedade angolana de capital privado. Criamos empresas, investimos em negócios existentes e formamos parcerias nas áreas de infraestruturas, construção civil, imobiliário e estruturação financeira.</span>
+        <span lang="en">Socolola Holding is a privately owned Angolan company. We build new ventures, invest in existing businesses and form partnerships in infrastructure, civil construction, real estate and financial structuring.</span>
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#contacto"><span lang="pt">Propor uma parceria</span><span lang="en">Propose a partnership</span></a>
+        <a class="btn ghost" href="#abordagem"><span lang="pt">Como investimos</span><span lang="en">How we invest</span></a>
+      </div>
+      <p class="coords">8°50′S · 13°14′E — LUANDA, ANGOLA</p>
+      <div class="hero-dots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    </div>
+  </section>
+
+  <section class="block" id="areas">
+    <div class="wrap">
+      <div class="head">
+        <span class="label"><span lang="pt">Áreas de atuação</span><span lang="en">Sectors</span></span>
+        <h2><span lang="pt">Quatro áreas que se complementam</span><span lang="en">Four sectors that work together</span></h2>
+        <p><span lang="pt">Um projeto de infraestrutura ou imobiliário precisa de construção, de terreno e de financiamento. Reunimos essas competências num só grupo.</span><span lang="en">An infrastructure or property project needs construction, land and financing. We bring those capabilities together in one group.</span></p>
+      </div>
+      <div class="sectors">
+        <article class="sector">
+          <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M3 26h28M6 26V14l11-7 11 7v12M3 30h28M12 26v-7h10v7"/></svg>
+          <h3><span lang="pt">Infraestruturas</span><span lang="en">Infrastructure</span></h3>
+          <p><span lang="pt">Projetos de infraestrutura pública e privada, do estudo inicial à execução com parceiros técnicos.</span><span lang="en">Public and private infrastructure projects, from early study to delivery with technical partners.</span></p>
+        </article>
+        <article class="sector">
+          <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M5 30V8h4v22M9 10h20M25 10v6M22 16h6v4h-6zM3 30h28M13 30V20h6v10"/></svg>
+          <h3><span lang="pt">Construção civil</span><span lang="en">Civil construction</span></h3>
+          <p><span lang="pt">Obras de construção civil desenvolvidas diretamente ou em consórcio com empresas especializadas.</span><span lang="en">Civil works carried out directly or in consortium with specialist contractors.</span></p>
+        </article>
+        <article class="sector">
+          <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M4 30V12h10v18M14 30V5h16v25M3 30h28M8 16h2M8 21h2M19 9h2M24 9h2M19 14h2M24 14h2M19 19h2M24 19h2"/></svg>
+          <h3><span lang="pt">Imobiliário</span><span lang="en">Real estate</span></h3>
+          <p><span lang="pt">Promoção e investimento imobiliário, com análise de cada ativo pelo seu valor e potencial de desenvolvimento.</span><span lang="en">Property development and investment, assessing each asset on its value and development potential.</span></p>
+        </article>
+        <article class="sector">
+          <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M4 28h26M7 28V18M14 28V12M21 28V15M28 28V7M7 14l7-6 7 3 7-6"/></svg>
+          <h3><span lang="pt">Estruturação financeira</span><span lang="en">Financial structuring</span></h3>
+          <p><span lang="pt">Estruturação de investimentos, parcerias e financiamento para tornar cada projeto viável.</span><span lang="en">Structuring of investments, partnerships and financing to make each project viable.</span></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block approach" id="abordagem">
+    <div class="wrap">
+      <div class="head">
+        <span class="label"><span lang="pt">Abordagem</span><span lang="en">Approach</span></span>
+        <h2><span lang="pt">Avaliamos oportunidades em diferentes fases</span><span lang="en">We assess opportunities at every stage</span></h2>
+        <p><span lang="pt">De conceitos que ainda precisam de ser testados a empresas estabelecidas com margem para crescer. A forma de entrada depende da oportunidade.</span><span lang="en">From early concepts that still need testing to established businesses with room to grow. How we take part depends on the opportunity.</span></p>
+      </div>
+      <div class="routes">
+        <article class="route">
+          <span class="tag"><span lang="pt">Criar</span><span lang="en">Build</span></span>
+          <h3><span lang="pt">Novos empreendimentos</span><span lang="en">New ventures</span></h3>
+          <p><span lang="pt">Desenvolvemos um negócio de raiz quando identificamos uma necessidade de mercado que ainda não está servida.</span><span lang="en">We build a business from the ground up when we see a market need that is not yet served.</span></p>
+        </article>
+        <article class="route">
+          <span class="tag"><span lang="pt">Investir</span><span lang="en">Invest</span></span>
+          <h3><span lang="pt">Empresas existentes</span><span lang="en">Existing companies</span></h3>
+          <p><span lang="pt">Investimos em empresas com atividade comprovada e trabalhamos com a gestão para acelerar o seu crescimento.</span><span lang="en">We invest in companies with a proven track record and work with management to accelerate their growth.</span></p>
+        </article>
+        <article class="route">
+          <span class="tag"><span lang="pt">Associar</span><span lang="en">Partner</span></span>
+          <h3><span lang="pt">Joint ventures</span><span lang="en">Joint ventures</span></h3>
+          <p><span lang="pt">Formamos parcerias com quem traz a competência técnica e os recursos de que o negócio precisa.</span><span lang="en">We partner with those who bring the technical expertise and resources the business needs.</span></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap criteria">
+      <div class="head">
+        <span class="label"><span lang="pt">Critérios</span><span lang="en">Criteria</span></span>
+        <h2><span lang="pt">Cada oportunidade responde a três perguntas</span><span lang="en">Every opportunity answers three questions</span></h2>
+        <p><span lang="pt">Estas respostas orientam a forma como investimos e como estruturamos cada parceria.</span><span lang="en">The answers guide how we invest and how we structure each partnership.</span></p>
+      </div>
+      <ul class="questions">
+        <li><span class="k"><span lang="pt">Mérito comercial</span><span lang="en">Commercial merit</span></span><span class="v"><span lang="pt">Existe procura real e um modelo de receita claro?</span><span lang="en">Is there real demand and a clear revenue model?</span></span></li>
+        <li><span class="k"><span lang="pt">Capital</span><span lang="en">Capital</span></span><span class="v"><span lang="pt">Quanto investimento exige, em que fases e com que fontes de financiamento?</span><span lang="en">How much investment does it need, in which phases and from which sources?</span></span></li>
+        <li><span class="k"><span lang="pt">Execução</span><span lang="en">Execution</span></span><span class="v"><span lang="pt">Que equipa, parceiros e licenças são necessários para funcionar na prática?</span><span lang="en">Which team, partners and licences does it take to work in practice?</span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block approach" id="equipa">
+    <div class="wrap">
+      <div class="head">
+        <span class="label"><span lang="pt">Equipa</span><span lang="en">Team</span></span>
+        <h2><span lang="pt">Quem lidera a Socolola</span><span lang="en">Who leads Socolola</span></h2>
+        <p><span lang="pt">Uma equipa de gestão com experiência em estratégia, relações corporativas e desenvolvimento de negócios.</span><span lang="en">A management team with experience in strategy, corporate relations and business development.</span></p>
+      </div>
+      <div class="team-grid">
+        <figure class="person">
+          <img src="assets/team-antonio.jpg" alt="Dr. António Mbakassy Jr." width="480" height="600" loading="lazy">
+          <figcaption>
+            <span class="name">Dr. António Mbakassy Jr.</span>
+            <span class="role"><span lang="pt">Presidente da Comissão Executiva (PCE)</span><span lang="en">Chief Executive Officer</span></span>
+          </figcaption>
+        </figure>
+        <figure class="person">
+          <img src="assets/team-benjamin.jpg" alt="Benjamin M’bakassy" width="480" height="600" loading="lazy">
+          <figcaption>
+            <span class="name">Benjamin M’bakassy</span>
+            <span class="role"><span lang="pt">Diretor de Relações Corporativas</span><span lang="en">Corporate Relations Director</span></span>
+          </figcaption>
+        </figure>
+        <figure class="person">
+          <img src="assets/team-luis.jpg" alt="Luís Maio" width="480" height="600" loading="lazy">
+          <figcaption>
+            <span class="name">Luís Maio</span>
+            <span class="role"><span lang="pt">Diretor de Estratégia Corporativa</span><span lang="en">Corporate Strategy Director</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block contact" id="contacto">
+    <div class="wrap">
+      <div class="head">
+        <span class="label"><span lang="pt">Contacto</span><span lang="en">Contact</span></span>
+        <h2><span lang="pt">Tem um projeto ou uma proposta de parceria?</span><span lang="en">Have a project or a partnership proposal?</span></h2>
+        <p><span lang="pt">Fale connosco. Analisamos cada proposta com atenção e respondemos diretamente.</span><span lang="en">Get in touch. We review every proposal carefully and reply directly.</span></p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <span class="label">Email</span>
+          <span class="val">geral@socolola.ao</span>
+        </div>
+        <div class="contact-item">
+          <span class="label"><span lang="pt">Sede</span><span lang="en">Head office</span></span>
+          <span class="val">Luanda, Angola</span>
+        </div>
+        <div class="contact-item">
+          <span class="label">LinkedIn</span>
+          <a class="val" href="https://www.linkedin.com/search/results/companies/?keywords=Socolola%20holding" target="_blank" rel="noopener">Socolola Holding ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Socolola Holding – Gestão de Empreendimentos, Lda.</span>
+    <span>www.socolola.ao</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  function setLang(l) {
+    root.setAttribute('data-lang', l);
+    root.setAttribute('lang', l === 'en' ? 'en' : 'pt-PT');
+    document.querySelectorAll('.lang button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.set === l));
+    });
+    try { localStorage.setItem('socolola-lang', l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('socolola-lang'); } catch (e) {}
+  setLang(saved === 'en' ? 'en' : 'pt');
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.dataset.set); });
+  });
+})();
+</script>
+</body>
+</html>
